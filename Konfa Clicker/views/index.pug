@@ -11,44 +11,44 @@ block content
             <h1> Konfa Clicker </h1>
         </header>
         
-        <div class="main">
-            <div class="leftSide" id="leftSide">
-                <br />
-                <p class="points"> Meme Value:<span id="points"></span></p>
-                <br />
-                <img width="400" height="400" id="mainButton" src="/images/konfaPhoto.png" />
-            </div>
-            <br />
-            <div class="rightSide">
-                <h3>POWERUPS:</h3>
-                <div id="powers">
-                    <table  class="powerup">
-                        <tr>
-                            <td ><button class="buyButton" id="firstPower">BUY</button></td>
-                            <td >No nieźle</td>
-                            <td >Cost: <span id="firstPowerCost"></span></td>
-                            <td >Counter: <span id="firstPowerCounter"></span></td>
-                        </tr>
-                    </table>
+            <div class="main">
+                <div class="leftSide" id="leftSide">
+                    <br />
+                    <p class="points"> Meme Value:<span id="points"></span></p>
+                    <br />
+                    <img width="400" height="400" id="mainButton" src="/images/konfaPhoto.png" />
                 </div>
+                <br />
+                <div class="rightSide">
+                    <h3>POWERUPS:</h3>
+                    <div id="powers">
+                        <table  class="powerup">
+                            <tr>
+                                <td ><button class="buyButton" id="firstPower">BUY</button></td>
+                                <td >No nieźle</td>
+                                <td >Cost: <span id="firstPowerCost"></span></td>
+                                <td >Counter: <span id="firstPowerCounter"></span></td>
+                            </tr>
+                        </table>
+                    </div>
 
-                <h3>UPGRADES:</h3>
-                <div id="upgrades">
-                    <table class="powerup">
-                        <tr>
-                            <td><button class="buyButton" id="pawel">BUY</button></td>
-                            <td><img id="pawelPhoto" src="/images/pawel.png"/></td>
-                            <td>Cost: <span id="firstPowerUpgradeCost"></span></td>
-                        </tr>
-                    </table>
+                    <h3>UPGRADES:</h3>
+                    <div id="upgrades">
+                        <table class="powerup">
+                            <tr>
+                                <td><button class="buyButton" id="firstPowerUpgrade">BUY</button></td>
+                                <td><img id="pawelPhoto" src="/images/pawel.png"/></td>
+                                <td>Cost: <span id="firstPowerUpgradeCost"></span></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
+
+
+            <footer>
+                <h3> Made by Dorian Janiak </h3>
+            </footer>
         </div>
-
-
-        <footer>
-            <h3> Made by Dorian Janiak </h3>
-        </footer>
-    </div>
-    script(src='/javascripts/main.js')
-    script(src='/javascripts/power_1.js')
+        script(src='/javascripts/powers.js')
+        script(type='module' src='/javascripts/main.js')
