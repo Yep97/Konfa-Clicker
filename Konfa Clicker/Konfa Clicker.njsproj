@@ -32,6 +32,9 @@
   <ItemGroup>
     <Content Include="app.js" />
     <Content Include="public\images\konfaPhoto.png" />
+    <Content Include="public\javascripts\main.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="public\javascripts\mainButton.js">
       <SubType>Code</SubType>
     </Content>
@@ -44,7 +47,7 @@
     <Content Include="public\javascripts\playerWallet.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="public\javascripts\main.js">
+    <Content Include="public\javascripts\gameEngine.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="routes\index.js" />

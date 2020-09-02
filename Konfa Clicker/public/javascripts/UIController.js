@@ -10,9 +10,8 @@ export class UIController {
         this.firstPowerButtonListener = undefined;
         this.firstPowerUpgradeButtonListener = undefined;
         this.startButtonListener = undefined;
+        this.startGameListener = undefined;
 
-        
-        
         this.firstPowerPrice = document.getElementById("firstPowerPrice");
         this.firstPowerCounter = document.getElementById("firstPowerCounter");
         this.firstPowerUpgradePrice = document.getElementById("firstPowerUpgradePrice");
@@ -36,6 +35,14 @@ export class UIController {
         startButton.addEventListener('click', function () {
             startButtonListener();
         })
+
+        window.addEventListener('load', function() {
+            startGameListener();
+        })
+    }
+
+    setStartGameListener(listener) {
+        this.startGameListener = listener;
     }
 
     setStartButtonListener(listener) {
@@ -58,20 +65,37 @@ export class UIController {
         this.currencyHTML.innerHTML = Math.round(currency);
     }
 
-    opacityOfButtons(currency, price, button) {
+    opacityOfFirstPower(currency, price) {
         if (currency >= price) {
-            button.style.opacity = '1';
+            this.firstPowerButton.style.opacity = '1';
         } else {
-            button.style.opacity = '0.5';
+            this.firstPowerButton.style.opacity = '0.5';
         }
     }
 
-    displayPowerCounter(counter, counterId) {
-        document.getElementById(counterId).innerHTML = counter;
+    opacityOfFirstPowerUpgrade(currency, price) {
+        if (currency >= price) {
+            this.firstPowerUpgradeButton.style.opacity = '1';
+        } else {
+            this.firstPowerUpgradeButton.style.opacity = '0.5';
+        }
     }
 
-    displayPowerPrice(price, priceId) {
-        document.getElementById(priceId).innerHTML = price;
+    opacityOfFirstPowerButtons(currency, price, upgradePrice) {
+        opacityOfFirstPower(currency, price);
+        opacityOfFirstUpgradePower(currency, upgradePrice);
+    }
+
+    displayFirstPowerCounter(counter) {
+        document.getElementById(this.firstPowerCounter).innerHTML = counter;
+    }
+
+    displayFirstPowerPrice(price) {
+        document.getElementById(this.firstPowerPrice).innerHTML = price;
+    }
+
+    displayFirstPowerUpgradePrice(upgradePrice) {
+        document.getElementById(this.firstPowerUpgradePrice).innerHTML = upgradePrice;
     }
 
     showGame() {
@@ -82,18 +106,6 @@ export class UIController {
         }
     }
 
-    //getMainButton() {
-    //    return mainButton;
-    //}
-/*
-    getFirstPowerButton() {
-        return firstPowerButton;
-    }
-
-    getFirstPowerUpgradeButton() {
-        return firstPowerUpgradeButton;
-    }
-*/
     getFirstPowerCounter() {
         return this.firstPowerCounter;
     }
