@@ -32,10 +32,16 @@
   <ItemGroup>
     <Content Include="app.js" />
     <Content Include="public\images\konfaPhoto.png" />
-    <Content Include="public\javascripts\JavaScript.js">
+    <Content Include="public\javascripts\mainButton.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="public\javascripts\powers.js">
+    <Content Include="public\javascripts\power.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\javascripts\UIController.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\javascripts\playerWallet.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="public\javascripts\main.js">

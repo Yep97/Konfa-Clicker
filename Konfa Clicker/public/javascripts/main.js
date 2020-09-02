@@ -1,69 +1,119 @@
-import { powerUp } from './powers.js'
+import { Power } from './power.js'
+import { PlayerWallet } from './playerWallet.js'
+import { MainButton } from './mainButton.js'
+import { UIController } from './UIController.js'
 
-let pressStart = document.getElementById("pressStart");
-let startSection = document.getElementById("startSection");
-let body = document.getElementById("body");
-let gameWidnow = document.getElementById("gameWindow");
-let header = document.getElementById("header");
-let mainButton = document.getElementById("mainButton");
-let leftSide = document.getElementById("leftSide");
-let points = document.getElementById("points");
+class Main {
+    constructor() {
+        this.playerWallet = new PlayerWallet(0);
+        this.firstPower = new Power(0.1, 0, 10, 500);
+        this.uiController = new UIController();
+        this.mainButton = new MainButton(1);
 
-//constructor(power, powerCost, powerUpgradeCost, powerCounter, powerPrice, powerValue, powerUpgradeValue, powerUpgradePrice, powerUpgrade)
-let firstPower = new powerUp("firstPower", "firstPowerCost", "firstPowerUpgradeCost", "firstPowerCounter", 10, 0, 1, 500, "firstPowerUprade");
+        let timeCounter = 1;
 
-let memeValue = 0;
-let clickValue = 1;
-let timeCounter = 1;
+        //let mainButtonButton = uiController.getMainButton();
+        //let firstPowerButton = uiController.getFirstPowerButton();
+        //let firstPowerUpgradeButton = uiController.getFirstPowerUpgradeButton();
 
-showGame();
+        const startButtonClickListener = () => {
+            startSection.style.opacity = '0';
+            setTimeout(function () {
+                body.removeChild(startSection);
+            }, 1000);
+            uiController.showGame();
+        };
 
-//Starting game button
-pressStart.onclick = function () {
-    startSection.style.opacity = '0';  // Fading the elements
-    setTimeout(function () {
-        body.removeChild(startSection);
-    }, 1000);
-    showGame();
-}
+        const mainButtonClickListener = () => {
+            const valueOfPress = mainButton.pressMainButton();
+            playerWallet.gainMoney(valueOfPress);
+        };
 
-function showGame() {
-    if (gameWidnow.style.display === "none") {
-        //        header.style.opacity = '1';
-        gameWidnow.style.display = "block";
-    } else {
-        gameWidnow.style.display = "none";
-    }
-}
+        const firstPowerButtonClickListener = () => {
+            const powerPrice = firstPower.getPowerPrice();
+            if (playerWallet.hasEnoughMoney(powerPrice)) {
+                playerWallet.takeMoney(powerPrice);
+                firstPower.buyPower();
+                firstPower.updatePowerPrice();
+            }
+        };
 
-mainButton.onclick = function () {
-    memeValue += clickValue;
-    points.innerHTML = memeValue;
-}
+        const firstPowerUpgradeButtonClickListener = () => {
+            const powerUpgradePrice = firstPower.getPowerUpgradePrice();
+            if (playerWallet.hasEnoughMoney(powerUpgradePrice)) {
+                playerWallet.takeMoney(powerUpgradePrice);
+                firstPower.upgradePower();
+            }
+        };
+
+        function displaySelectedPowerCounter(selectedPower, counterId) {
+            const powerCounter = selectedPower.getPowerCounter();
+            uiController.displayPowerCounter(powerCounter, counterId);
+        }
+
+        function displaySelectedPowerPrice(selectedPower, priceId) {
+            const powerPrice = selectedPower.getPowerPrice();
+            uiController.displayPowerPrice(powerPrice, priceId);
+        }
+
+        function displaySelectedPowerUpgradePrice(selectedPower, priceId) {
+            const powerUpgradePrice = selectedPower.getPowerUpgradePrice();
+            uiController.displayPowerPrice(powerUpgradePrice, priceId);
+        }
+        /*
+        function chceckOpacityOfSelectedPower(selectedPower, currentCurrency, button) {
+            const powerPrice = selectedPower.getPowerPrice();
+            uiController.opacityOfButtons(currentCurrency, powerPrice, button);
+        }
+    
+        function chceckOpacityOfSelectedPowerUpgrade(selectedPower, currentCurrency, button) {
+            const powerUpgradePrice = selectedPower.getPowerUpgradePrice();
+            uiController.opacityOfButtons(currentCurrency, powerUpgradePrice, button);
+        }
+        */
+
+        function gainMoneyFromSelectedPower(selectedPower) {
+            let powerPoints = selectedPower.getCalculatedPoints();
+            playerWallet.gainMoney(powerPoints);
+        }
+
+        uiController.setStartButtonListener(startButtonClickListener);
+        uiController.showGame();
 
 
+        function timeLoop() {
+            setTimeout(function () {
+                const currentCurrency = playerWallet.currentCurrency();
 
-function timeLoop() {
-    setTimeout(function () {
-        //Meme Value Gain 
-        points.innerHTML = memeValue;
-        memeValue += firstPower.powerValue * firstPower.powerUpgradeValue;
+                uiController.displayPlayerWallet(currentCurrency);
 
-        document.getElementById("firstPower").onclick = function () { firstPower.powerClick(points, memeValue) };
-
-        document.getElementById("firstPowerUpgrade").onclick = function () { firstPower.powerUpgradeClick(memeValue) };
+                /*
+                chceckOpacityOfSelectedPower(firstPower, currentCurrency, firstPowerButton);
+                chceckOpacityOfSelectedPowerUpgrade(firstPower, currentCurrency, firstPowerUpgradeButton);
+                */
 
 
-        firstPower.opacityOfButtons(memeValue);
+                displaySelectedPowerCounter(firstPower, "firstPowerCounter");
+                displaySelectedPowerPrice(firstPower, "firstPowerPrice");
+                displaySelectedPowerUpgradePrice(firstPower, "firstPowerUpgradePrice");
 
-        timeCounter++;
-        if (timeCounter < Infinity) {
+                gainMoneyFromSelectedPower(firstPower);
+
+
+                uiController.setMainButtonListener(mainButtonClickListener);
+                uiController.setFirstPowerButtonListener(firstPowerButtonClickListener);
+                uiController.setFirstPowerUpgradeButtonListener(firstPowerUpgradeButtonClickListener);
+
+                timeCounter++;
+                if (timeCounter < Infinity) {
+                    timeLoop();
+                }
+            }, 100)
+        }
+
+
+        window.onload = function start() {
             timeLoop();
         }
-    }, 1000)
-}
-
-
-window.onload = function start() {
-    timeLoop();
+    }
 }

@@ -14,7 +14,7 @@ block content
             <div class="main">
                 <div class="leftSide" id="leftSide">
                     <br />
-                    <p class="points"> Meme Value:<span id="points"></span></p>
+                    <p class="points"> Meme Value:<span id="currencyHTML"></span></p>
                     <br />
                     <img width="400" height="400" id="mainButton" src="/images/konfaPhoto.png" />
                 </div>
@@ -26,7 +26,7 @@ block content
                             <tr>
                                 <td ><button class="buyButton" id="firstPower">BUY</button></td>
                                 <td >No nieźle</td>
-                                <td >Cost: <span id="firstPowerCost"></span></td>
+                                <td >Cost: <span id="firstPowerPrice"></span></td>
                                 <td >Counter: <span id="firstPowerCounter"></span></td>
                             </tr>
                         </table>
@@ -38,7 +38,7 @@ block content
                             <tr>
                                 <td><button class="buyButton" id="firstPowerUpgrade">BUY</button></td>
                                 <td><img id="pawelPhoto" src="/images/pawel.png"/></td>
-                                <td>Cost: <span id="firstPowerUpgradeCost"></span></td>
+                                <td>Cost: <span id="firstPowerUpgradePrice"></span></td>
                             </tr>
                         </table>
                     </div>
@@ -50,5 +50,5 @@ block content
                 <h3> Made by Dorian Janiak </h3>
             </footer>
         </div>
-        script(src='/javascripts/powers.js')
+        script(src='/javascripts/UIController.js')
         script(type='module' src='/javascripts/main.js')
