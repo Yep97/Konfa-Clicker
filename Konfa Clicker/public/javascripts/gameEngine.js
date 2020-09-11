@@ -13,10 +13,7 @@ export class GameEngine {
         this.timeCounter = 1;
 
         const startButtonClickListener = () => {
-            startSection.style.opacity = '0';
-            setTimeout(function () {
-                body.removeChild(startSection);
-            }, 1000);
+            uiController.hideTitle();
             uiController.showGame();
         };
 
@@ -44,17 +41,17 @@ export class GameEngine {
 
         const startGameLoadListener = () => {
             uiController.showGame();
-            timeLoop();
-        }
+            //gameLoop();
+        };
 
-        uiController.setStartGameListener(startGameLoadListener);
-        uiController.setStartButtonListener(startButtonClickListener);
-        uiController.setMainButtonListener(mainButtonClickListener);
-        uiController.setFirstPowerButtonListener(firstPowerButtonClickListener);
-        uiController.setFirstPowerUpgradeButtonListener(firstPowerUpgradeButtonClickListener);
+        this.uiController.setStartGameListener(startGameLoadListener);
+        this.uiController.setStartButtonListener(startButtonClickListener);
+        this.uiController.setMainButtonListener(mainButtonClickListener);
+        this.uiController.setFirstPowerButtonListener(firstPowerButtonClickListener);
+        this.uiController.setFirstPowerUpgradeButtonListener(firstPowerUpgradeButtonClickListener);
     }
 
-    showeFirstPowerCounter() {
+    showFirstPowerCounter() {
         const powerCounter = firstPower.getPowerCounter();
         uiController.displayFirstPowerCounter(powerCounter);
     }
@@ -82,7 +79,8 @@ export class GameEngine {
 
     gameLoop() {
         setTimeout(function () {
-            const currentCurrency = playerWallet.currentCurrency();
+            //const currentCurrency = playerWallet.getCurrentCurrency();
+            const currentCurrency = playerWallet.getCurrency();
 
             uiController.displayPlayerWallet(currentCurrency);
 

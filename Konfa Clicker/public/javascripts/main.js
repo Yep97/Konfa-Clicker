@@ -1,5 +1,15 @@
 import { GameEngine } from './gameEngine.js'
 
-const gameEngine = new GameEngine();
 
-gameEngine.gameLoop();
+class Main {
+    constructor() {
+        this.gameEngine = new GameEngine();
+    }
+
+    startGame() {
+        this.gameEngine.gameLoop();
+    }
+}
+
+const main = new Main();
+main.startGame();

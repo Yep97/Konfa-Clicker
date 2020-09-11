@@ -20,7 +20,7 @@ export class PlayerWallet {
         return this.currency;
     }
 
-    currentCurrency() {
+    getCurrency() {
         return this.currency;
     }
 }

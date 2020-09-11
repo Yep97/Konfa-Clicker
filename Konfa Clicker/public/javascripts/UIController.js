@@ -17,22 +17,22 @@ export class UIController {
         this.firstPowerUpgradePrice = document.getElementById("firstPowerUpgradePrice");
 
         const firstPowerUpgradeButton = document.getElementById("firstPowerUpgrade");
-        firstPowerUpgradeButton.addEventListener('click', function () {
+        firstPowerUpgradeButton.addEventListener('click', function() {
             firstPowerUpgradeButtonListener();
         })
 
         const firstPowerButton = document.getElementById("firstPower");
-        firstPowerButton.addEventListener('click', function () {
+        firstPowerButton.addEventListener('click', function() {
             firstPowerButtonListener();
         })
 
         const mainButton = document.getElementById("mainButton");
-        mainButton.addEventListener('click', function () {
+        mainButton.addEventListener('click', function() {
             mainButtonListener();
         })
 
         const startButton = document.getElementById("pressStart");
-        startButton.addEventListener('click', function () {
+        startButton.addEventListener('click', function() {
             startButtonListener();
         })
 
@@ -116,5 +116,12 @@ export class UIController {
 
     getFirstPowerUpgradePrice() {
         return this.firstPowerUpgradePrice;
+    }
+
+    hideTitle() {
+        this.startSection.style.opacity = '0';
+        setTimeout(function () {
+            this.body.removeChild(startSection);
+        }, 1000);
     }
 }
