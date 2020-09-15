@@ -150,6 +150,8 @@ footer {
 }
 
 #mainButton {
+    width: 400px;
+    height: 400px;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -202,8 +204,13 @@ table, td {
     border: solid 1px black;
 }
 
-#pawelPhoto {
+.photoOfUpgrade {
     mix-blend-mode: multiply;
     height: 25px;
     width: 25px;
 }
+
+.borderRadius {
+    border-radius: 50%;
+}
+

@@ -1,13 +1,29 @@
 export class MainButton {
-    constructor(valueOfPress) {
-        this.valueOfPress = valueOfPress;
+    constructor() {
+        this.valueOfPress = 1;
+        this.upgradePrice = 500;
+        this.counter = 0;
     }
 
-    pressMainButton() {
+    pressButton() {
         return this.valueOfPress;
     }
 
-    upgradeMainButton() {           // PóŸniej wprowadziæ ulepszenie 
-        return this.valueOfPress++;
+    updateUpgradePrice() {
+        this.upgradePrice *= 10;
+        return this.upgradePrice;
+    }
+
+    buyUpgrade() {
+        return this.counter++;
+    }
+
+    upgradeValueOfPress() {
+        this.valueOfPress *= 2;
+        return this.valueOfPress;
+    }
+
+    getUpgradePrice() {
+        return this.upgradePrice;
     }
 }

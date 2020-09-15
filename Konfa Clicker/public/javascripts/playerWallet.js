@@ -1,6 +1,6 @@
 export class PlayerWallet {
-    constructor(currency) {
-        this.currency = currency;
+    constructor() {
+        this.currency = 0;
     }
 
     hasEnoughMoney(price) {

@@ -1,54 +1,91 @@
 extend layout
 
 block content
-    <section class="text" id="startSection">
-        <h1 class="title"><span class="fontawesome-star star"></span> <span>Konfa Clicker</span> <span class="fontawesome-star star"></span></h1>
-        <h3 class="title">Press the <button type="button" id="pressStart"> button </button> to start</h3>
-    </section>
-
-    <div id="gameWindow" class="gameWindow">
-        <header id="header">
-            <h1> Konfa Clicker </h1>
-        </header>
+    section(class='text' id='startSection')
+        h1(class='title')
+            span(class='fontawesome-star star') 
+            | 
+            span Konfa Clicker
+            | 
+            span(class='fontawesome-star star') 
+        h3(class='title')
+            span Press the
+            |
+            |
+            button(type='button' id='pressStart') button
+            |
+            |
+            span to start
+    
+    div(id='gameWindow' class='gameWindow')
+        header(id='header')
+            h1 Konfa Clicker
         
-            <div class="main">
-                <div class="leftSide" id="leftSide">
-                    <br />
-                    <p class="points"> Meme Value:<span id="currencyHTML"></span></p>
-                    <br />
-                    <img width="400" height="400" id="mainButton" src="/images/konfaPhoto.png" />
-                </div>
-                <br />
-                <div class="rightSide">
-                    <h3>POWERUPS:</h3>
-                    <div id="powers">
-                        <table  class="powerup">
-                            <tr>
-                                <td ><button class="buyButton" id="firstPower">BUY</button></td>
-                                <td >No nieźle</td>
-                                <td >Cost: <span id="firstPowerPrice"></span></td>
-                                <td >Counter: <span id="firstPowerCounter"></span></td>
-                            </tr>
-                        </table>
-                    </div>
+        div(class='main')
+            div(class='leftSide' id='leftSide')
+                br
+                p(class='points')
+                    span Meme Value:
+                    span(id='currencyHTML')
+                br
+                img(id='mainButton' src='/images/konfaPhoto.png')
+            br
+            div(class='rightSide')
+                h3 POWERS:
+                div(id='powers')
+                    table(class='powerup')
+                        tr
+                            td
+                                button(class='buyButton' id='firstPower') BUY
+                            td 
+                                span No Nieźle
+                            td
+                                span Cost: 
+                                span(id='firstPowerPrice')
+                            td
+                                span Counter:
+                                span(id='firstPowerCounter')
+                        tr
+                            td
+                                button(class='buyButton' id='secondPower') BUY
+                            td
+                                span NANI ARIGATO!
+                            td
+                                span Cost: 
+                                span(id='secondPowerPrice')
+                            td
+                                span Counter:
+                                span(id='secondPowerCounter')
+                h3 UPGRADES:
+                div(id='upgrades')
+                    table(class='powerup')
+                        tr
+                            td
+                                button(class='buyButton' id='mainButtonUpgrade') BUY
+                            td
+                                img(class='photoOfUpgrade borderRadius' src='/images/konfaPhoto.png')
+                            td
+                                span Cost:
+                                span(id='mainButtonUpgradePrice')
+                        tr
+                            td
+                                button(class='buyButton' id='firstPowerUpgrade') BUY
+                            td
+                                img(class='photoOfUpgrade' src='/images/pawel.png')
+                            td
+                                span Cost:
+                                span(id='firstPowerUpgradePrice')
+                        tr
+                            td
+                                button(class='buyButton' id='secondPowerUpgrade') BUY
+                            td
+                                img(class='photoOfUpgrade' src='/images/kuba.jpg')
+                            td
+                                span Cost:
+                                span(id='secondPowerUpgradePrice')
 
-                    <h3>UPGRADES:</h3>
-                    <div id="upgrades">
-                        <table class="powerup">
-                            <tr>
-                                <td><button class="buyButton" id="firstPowerUpgrade">BUY</button></td>
-                                <td><img id="pawelPhoto" src="/images/pawel.png"/></td>
-                                <td>Cost: <span id="firstPowerUpgradePrice"></span></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        footer
+            h3 Made by Dorian Janiak
 
-
-            <footer>
-                <h3> Made by Dorian Janiak </h3>
-            </footer>
-        </div>
-        script(type='module' src='/javascripts/UIController.js')
-        script(type='module' src='/javascripts/main.js')
+    script(type='module' src='/javascripts/UIController.js')
+    script(type='module' src='/javascripts/main.js')

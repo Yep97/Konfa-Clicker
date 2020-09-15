@@ -1,13 +1,18 @@
 export class Power {
-    constructor(baseValue, powerCounter, powerPrice, powerUpgradePrice) {
+    constructor(baseValue, powerPrice, powerUpgradePrice) {
         this.baseValue = baseValue;
-        this.powerCounter = powerCounter;
+        this.powerCounter = 0;
         this.powerPrice = powerPrice;
         this.powerUpgradePrice = powerUpgradePrice;
+        this.powerUpgradeCounter = 0;
     }
 
     buyPower() {
         return this.powerCounter++;
+    }
+
+    buyPowerUpgrade() {
+        return this.powerUpgradeCounter++;
     }
 
     getPowerCounter() {
@@ -19,6 +24,15 @@ export class Power {
             return this.powerPrice;
         else {
             this.powerPrice += Math.round(Math.pow(this.powerPrice, 0.7));
+            return this.powerPrice;
+        }
+    }
+
+    updatePowerUpgradePrice() {
+        if (this.powerUpgradeCounter === 0)
+            return this.powerUpgradePrice;
+        else {
+            this.powerUpgradePrice *= 5;
             return this.powerPrice;
         }
     }

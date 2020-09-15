@@ -5,97 +5,152 @@ import { UIController } from './UIController.js'
     
 export class GameEngine {
     constructor() {
-        this.playerWallet = new PlayerWallet(0);
-        this.firstPower = new Power(0.1, 0, 10, 500);
+        this.playerWallet = new PlayerWallet();
+        this.firstPower = new Power(0.0025, 15, 100);
+        this.secondPower = new Power(0.01, 100, 500);
         this.uiController = new UIController();
-        this.mainButton = new MainButton(1);
+        this.mainButton = new MainButton();
 
         this.timeCounter = 1;
 
+        const startGameLoadListener = () => {
+            this.uiController.showGame();
+            this.gameLoop();
+        };
+
         const startButtonClickListener = () => {
-            uiController.hideTitle();
-            uiController.showGame();
+            this.uiController.hideTitle();
+            this.uiController.showGame();
         };
 
         const mainButtonClickListener = () => {
-            const valueOfPress = mainButton.pressMainButton();
-            playerWallet.gainMoney(valueOfPress);
+            const valueOfPress = this.mainButton.pressButton();
+            this.playerWallet.gainMoney(valueOfPress);
+        };
+
+        const mainButtonUpgradeClickListener = () => {
+            const upgradePrice = this.mainButton.getUpgradePrice();
+            if (this.playerWallet.hasEnoughMoney(upgradePrice)) {
+                this.playerWallet.takeMoney(upgradePrice);
+                this.mainButton.buyUpgrade();
+                this.mainButton.upgradeValueOfPress();
+            }
         };
 
         const firstPowerButtonClickListener = () => {
-            const powerPrice = firstPower.getPowerPrice();
-            if (playerWallet.hasEnoughMoney(powerPrice)) {
-                playerWallet.takeMoney(powerPrice);
-                firstPower.buyPower();
-                firstPower.updatePowerPrice();
+            const powerPrice = this.firstPower.getPowerPrice();
+            if (this.playerWallet.hasEnoughMoney(powerPrice)) {
+                this.playerWallet.takeMoney(powerPrice);
+                this.firstPower.buyPower();
+                this.firstPower.updatePowerPrice();
             }
         };
 
         const firstPowerUpgradeButtonClickListener = () => {
-            const powerUpgradePrice = firstPower.getPowerUpgradePrice();
-            if (playerWallet.hasEnoughMoney(powerUpgradePrice)) {
-                playerWallet.takeMoney(powerUpgradePrice);
-                firstPower.upgradePower();
+            const powerUpgradePrice = this.firstPower.getPowerUpgradePrice();
+            if (this.playerWallet.hasEnoughMoney(powerUpgradePrice)) {
+                this.playerWallet.takeMoney(powerUpgradePrice);
+                this.firstPower.buyPowerUpgrade();
+                this.firstPower.upgradePower();
+                this.firstPower.updatePowerUpgradePrice();
             }
         };
 
-        const startGameLoadListener = () => {
-            uiController.showGame();
-            //gameLoop();
+        const secondPowerButtonClickListener = () => {
+            const powerPrice = this.secondPower.getPowerPrice();
+            if (this.playerWallet.hasEnoughMoney(powerPrice)) {
+                this.playerWallet.takeMoney(powerPrice);
+                this.secondPower.buyPower();
+                this.secondPower.updatePowerPrice();
+            }
+        };
+
+        const secondPowerUpgradeButtonClickListener = () => {
+            const powerUpgradePrice = this.secondPower.getPowerUpgradePrice();
+            if (this.playerWallet.hasEnoughMoney(powerUpgradePrice)) {
+                this.playerWallet.takeMoney(powerUpgradePrice);
+                this.secondPower.buyPowerUpgrade();
+                this.secondPower.upgradePower();
+                this.secondPower.updatePowerUpgradePrice();
+            }
         };
 
         this.uiController.setStartGameListener(startGameLoadListener);
         this.uiController.setStartButtonListener(startButtonClickListener);
         this.uiController.setMainButtonListener(mainButtonClickListener);
+        this.uiController.setMainButtonUpgradeListener(mainButtonUpgradeClickListener);
         this.uiController.setFirstPowerButtonListener(firstPowerButtonClickListener);
         this.uiController.setFirstPowerUpgradeButtonListener(firstPowerUpgradeButtonClickListener);
+        this.uiController.setSecondPowerButtonListener(secondPowerButtonClickListener);
+        this.uiController.setSecondPowerUpgradeButtonListener(secondPowerUpgradeButtonClickListener);
     }
 
-    showFirstPowerCounter() {
-        const powerCounter = firstPower.getPowerCounter();
-        uiController.displayFirstPowerCounter(powerCounter);
+
+    showMainButtonUpgradePrice() {
+        const powerUpgradePrice = this.mainButton.getUpgradePrice();
+        this.uiController.displayMainButtonUpgradePrice(powerUpgradePrice);
     }
 
-    showFirstPowerPrice() {
-        const powerPrice = firstPower.getPowerPrice();
-        uiController.displayFirstPowerPrice(powerPrice);
+    showPowersCounters() {
+        const firstPowerCounter = this.firstPower.getPowerCounter();
+        const secondPowerCounter = this.secondPower.getPowerCounter();
+        this.uiController.displayFirstPowerCounter(firstPowerCounter);
+        this.uiController.displaySecondPowerCounter(secondPowerCounter);
     }
 
-    showFirstPowerUpgradePrice() {
-        const powerUpgradePrice = firstPower.getPowerUpgradePrice();
-        uiController.displayFirstPowerUpgradePrice(powerUpgradePrice);
+    showPowersPrices() {
+        const firstPowerPrice = this.firstPower.getPowerPrice();
+        const secondPowerPrice = this.secondPower.getPowerPrice();
+        this.uiController.displayFirstPowerPrice(firstPowerPrice);
+        this.uiController.displaySecondPowerPrice(secondPowerPrice);
     }
 
-    gainMoneyFromSelectedPower(selectedPower) {
-        let powerPoints = selectedPower.getCalculatedPoints();
-        playerWallet.gainMoney(powerPoints);
+    showPowersUpgradesPrices() {
+        const firstPowerUpgradePrice = this.firstPower.getPowerUpgradePrice();
+        const secondPowerUpgradePrice = this.secondPower.getPowerUpgradePrice();
+        this.uiController.displayFirstPowerUpgradePrice(firstPowerUpgradePrice);
+        this.uiController.displaySecondPowerUpgradePrice(secondPowerUpgradePrice);
     }
 
-    setOpacityOfFirstPower(currentCurrency) {
-        const powerPrice = firstPower.getPowerPrice();
-        const powerUpgradePrice = firstPower.getPowerUpgradePrice();
-        uiController.opacityOfFirstPowerButtons(currentCurrency, powerPrice, powerUpgradePrice);
+    gainMoneyFromPowers() {
+        let firstPowerPoints = this.firstPower.getCalculatedPoints();
+        let secondPowerPoints = this.secondPower.getCalculatedPoints();
+        this.playerWallet.gainMoney(firstPowerPoints);
+        this.playerWallet.gainMoney(secondPowerPoints);
+    }
+
+    setOpacity(currentCurrency) {
+        const mainButtonUpgradePrice = this.mainButton.getUpgradePrice();
+        const firstPowerPrice = this.firstPower.getPowerPrice();
+        const firstPowerUpgradePrice = this.firstPower.getPowerUpgradePrice();
+        const secondPowerPrice = this.secondPower.getPowerPrice();
+        const secondPowerUpgradePrice = this.secondPower.getPowerUpgradePrice();
+
+        this.uiController.opacityOfMainButtonUpgrade(currentCurrency, mainButtonUpgradePrice);
+        this.uiController.opacityOfFirstPowerButtons(currentCurrency, firstPowerPrice, firstPowerUpgradePrice);
+        this.uiController.opacityOfSecondPowerButtons(currentCurrency, secondPowerPrice, secondPowerUpgradePrice);
     }
 
     gameLoop() {
-        setTimeout(function () {
-            //const currentCurrency = playerWallet.getCurrentCurrency();
-            const currentCurrency = playerWallet.getCurrency();
+        setTimeout(() => {
+            const currentCurrency = this.playerWallet.getCurrency();
 
-            uiController.displayPlayerWallet(currentCurrency);
 
-            setOpacityOfSelectedPower(currentCurrency);
+            this.uiController.displayPlayerWallet(currentCurrency);
 
-            showFirstPowerCounter();
-            showFirstPowerPrice();
-            showFirstPowerUpgradePrice();
+            this.setOpacity(currentCurrency);
 
-            gainMoneyFromSelectedPower(firstPower);
+            this.showMainButtonUpgradePrice();
+            this.showPowersCounters();
+            this.showPowersPrices();
+            this.showPowersUpgradesPrices();
 
-            timeCounter++;
-            if (timeCounter < Infinity) {
-                gameLoop();
+            this.gainMoneyFromPowers();
+
+            this.timeCounter++;
+            if (this.timeCounter < Infinity) {
+                this.gameLoop();
             }
-        }, 100)
+        }, 100);
     }
 }
