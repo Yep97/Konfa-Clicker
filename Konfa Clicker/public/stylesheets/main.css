@@ -113,12 +113,12 @@ header {
 footer {
     position: absolute;
     bottom: 0;
-    /*clear: both;*/
     min-height: 50px;
     width: 100%;
     border: solid 5px;
     border-style: inset;
     text-align: center;
+    margin-bottom: 0;
 }
 
 .main {
@@ -142,6 +142,9 @@ footer {
     min-height: 500px;
 }
 
+#startSection {
+    z-index: 0;
+}
 
 .gameWindow {
     width: 100%;
@@ -205,7 +208,6 @@ table, td {
 }
 
 .photoOfUpgrade {
-    mix-blend-mode: multiply;
     height: 25px;
     width: 25px;
 }
@@ -214,3 +216,12 @@ table, td {
     border-radius: 50%;
 }
 
+#popUp {
+    display: inline-block;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    position: fixed;
+    cursor: pointer;
+    z-index: 1;
+}

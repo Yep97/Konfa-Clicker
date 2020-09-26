@@ -31,7 +31,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
-    <Content Include="public\images\konfaPhoto.png" />
+    <Content Include="public\images\firstPowerPhoto.png" />
+    <Content Include="public\images\mainButtonPhoto.png" />
+    <Content Include="public\images\popUpPhoto.png" />
+    <Content Include="public\images\secondPowerPhoto.png" />
+    <Content Include="public\images\thirdPowerPhoto.png" />
+    <Content Include="public\javascripts\popUp.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="public\javascripts\main.js">
       <SubType>Code</SubType>
     </Content>
