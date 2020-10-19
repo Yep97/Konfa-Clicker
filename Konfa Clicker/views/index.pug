@@ -25,21 +25,22 @@ block content
             img(id='popUp' src='/images/popUpPhoto.png')
 
         div(class='main')
-            div(class='leftSide' id='leftSide')
+            div(class='col leftSide' id='leftSide')
                 br
                 p(class='points')
                     span Meme Value:
                     span(id='currencyHTML')
                 br
-                img(id='mainButton' src='/images/mainButtonPhoto.png')
-            br
-            div(class='rightSide')
+                div(id='mainButton')
+
+            div(class='col middle')
+            div(class='col rightSide')
                 h3 POWERS:
                 div(id='powers')
                     table(class='powerup')
                         tr
                             td
-                                button(class='buyButton' id='firstPower') BUY
+                                button(class='buyButton glow-on-hover' id='firstPower') BUY
                             td 
                                 span No Nieźle
                             td
@@ -50,7 +51,7 @@ block content
                                 span(id='firstPowerCounter')
                         tr
                             td
-                                button(class='buyButton' id='secondPower') BUY
+                                button(class='buyButton glow-on-hover' id='secondPower') BUY
                             td
                                 span NANI ARIGATO!
                             td
@@ -61,7 +62,7 @@ block content
                                 span(id='secondPowerCounter')
                         tr
                             td
-                                button(class='buyButton' id='thirdPower') BUY
+                                button(class='buyButton glow-on-hover' id='thirdPower') BUY
                             td
                                 span Enneagram
                             td
@@ -75,7 +76,7 @@ block content
                     table(class='powerup')
                         tr
                             td
-                                button(class='buyButton' id='mainButtonUpgrade') BUY
+                                button(class='buyButton glow-on-hover' id='mainButtonUpgrade') BUY
                             td
                                 img(class='photoOfUpgrade borderRadius' src='/images/mainButtonPhoto.png')
                             td
@@ -83,7 +84,7 @@ block content
                                 span(id='mainButtonUpgradePrice')
                         tr
                             td
-                                button(class='buyButton' id='firstPowerUpgrade') BUY
+                                button(class='buyButton glow-on-hover' id='firstPowerUpgrade') BUY
                             td
                                 img(class='photoOfUpgrade' src='/images/firstPowerPhoto.png')
                             td
@@ -91,7 +92,7 @@ block content
                                 span(id='firstPowerUpgradePrice')
                         tr
                             td
-                                button(class='buyButton' id='secondPowerUpgrade') BUY
+                                button(class='buyButton glow-on-hover' id='secondPowerUpgrade') BUY
                             td
                                 img(class='photoOfUpgrade' src='/images/secondPowerPhoto.png')
                             td
@@ -99,7 +100,7 @@ block content
                                 span(id='secondPowerUpgradePrice')
                         tr
                             td
-                                button(class='buyButton' id='thirdPowerUpgrade') BUY
+                                button(class='buyButton glow-on-hover' id='thirdPowerUpgrade') BUY
                             td
                                 img(class='photoOfUpgrade' src='/images/thirdPowerPhoto.png')
                             td

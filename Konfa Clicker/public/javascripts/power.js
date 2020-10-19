@@ -5,7 +5,7 @@ export class Power {
         this.powerUpgradePrice = powerUpgradePrice;
         this.counterValue = counterValue;
 
-        this.counterUpgradeValue = 6 * this.counterValue;
+        this.counterUpgradeValue = 3 * this.counterValue;
         this.powerCounter = 0;
         this.powerUpgradeCounter = 0;
         this.summedUpCounterValue = 0;
@@ -68,7 +68,7 @@ export class Power {
 
     getValueOfCounters() {
         this.summedUpCounterValue = 0;
-        this.summedUpCounterValue = 0.1 * (this.powerCounter * this.counterValue + this.powerUpgradeCounter * this.counterUpgradeValue) * this.powerPrice;
+        this.summedUpCounterValue = 0.01 * (this.powerCounter * this.counterValue + this.powerUpgradeCounter * this.counterUpgradeValue) * this.powerPrice;
         return this.summedUpCounterValue;
     }
 
